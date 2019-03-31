@@ -1,0 +1,208 @@
+body {
+  overflow-x: hidden;
+}
+
+#wrapper {
+	padding-left: 0;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+	padding-left: 250px;
+}
+
+#sidebar-wrapper {
+	z-index: 1000;
+	position: fixed;
+	left: 250px;
+	width: 0;
+	height: 100%;
+	margin-left: -250px;
+	overflow-y: auto;
+	background:#ffae42;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+	width: 250px;
+}
+
+#page-content-wrapper {
+	width: 100%;
+	position: absolute;
+	padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+	position: absolute;
+	margin-right: -250px;
+}
+
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+	position: absolute;
+	top: 0;
+	width: 250px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar-nav li {
+	text-indent: 20px;
+	line-height: 40px;
+}
+
+.sidebar-nav li a {
+	display: block;
+	text-decoration: none;
+	color: #090f14;
+	font-size: 20px;
+  
+}
+
+.sidebar-nav li a:hover {
+	
+	text-decoration: none;
+	color: #FF4500;
+	background:#d1d1d1 ;/*rgba(255, 255, 255, 0.2);*/
+}
+
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+	text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand {
+	height: 150px;
+	width:100%;
+	font-size: 18px;
+	line-height: 60px;
+	background-color: #gray;
+}
+.sidebar-nav>.sidebar-brand img{
+	width:50%;
+	margin:10px;
+}
+
+.sidebar-nav>.sidebar-brand a {
+	color: red;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+	color: blue;
+	background: none;
+}
+
+@media(min-width:768px) {
+	#wrapper {
+		padding-left: 0;
+	}
+	#wrapper.toggled {
+		padding-left: 250px;
+	}
+	#sidebar-wrapper {
+		width: 0;
+	}
+	#wrapper.toggled #sidebar-wrapper {
+		width: 250px;
+	}
+	#page-content-wrapper {
+		padding: 20px;
+		position: relative;
+	}
+	#wrapper.toggled #page-content-wrapper {
+		position: relative;
+		margin-right: 0;
+	}
+}
+
+.navbar-green{
+	background-color:#ffae42;
+}
+.navbar-green  a{color:white;}
+.navbar-green li  a:hover{color:white; background-color:red;}
+.navbar-green li  a:active{color:white; background-color:red;}
+.navbar-green li  a:visited{color:white; background-color:#009788;}
+.navbar-toggle .glyphicon-menu-hamburger{font-size:20px; color:white;}
+
+.content{
+	width:100%;
+	height:100px;
+	float:left;
+	
+}
+.select {
+	width: 100%;
+	outline: none;
+	padding: 10px;
+	font-weight:bold;
+	border:none;
+	cursor: pointer;
+	
+}
+.event-name{
+		font-size: 18px;
+	}
+.btn-info.btn-save{
+	margin-top:10px;
+	background-color: #009788;
+	border:none;
+}
+.btn-save:hover{
+	background-color: #009788;
+	border:none;
+}
+.btn-save:visited{
+	background-color: #009788;
+	border:none;
+}
+.btn-save:active{
+	background-color: #009788;
+	border: none;
+}
+.btn-save:link{
+	background-color: #009788;
+	border:none;
+}
+.table-font{
+	font-size: 20px;
+}
+.red-heart{
+	color:red;
+	font-size:24px;
+}
+.navbar-brand{
+	cursor: pointer;
+}
+.text-field{
+	border:none;
+	outline:none;
+	border-bottom: 1px solid #808080;
+	
+}
+.balance{
+	width:100%;
+	font-size: 14px;"
+}
+.form{
+	margin:20px;
+}
+.btn-green{
+	background:#009788;
+	border: 1px solid white;
+}
+.glyphicon-search{
+	color: white;
+}
+.full-width{
+	width:100%;
+}

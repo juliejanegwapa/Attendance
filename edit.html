@@ -1,0 +1,220 @@
+<form action=""  method="post"> 
+                <div class="row">
+                <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                        <div class="col-lg-4 col-xs-6" class="form-group">
+                    <label>Vehicle Type <span style="color:red;font-size:8px;"><i class="fa fa-asterisk" aria-hidden="true"></i></span></label>
+                        <select name="vehicle_type" class="form-control">
+                        <option <?php echo ($vehicle_type=='Bicycle')?'selected':'' ?>>Bicycle</option>
+                        <option <?php echo ($vehicle_type=='Bike')?'selected':'' ?>>Bike </option>
+                        <option <?php echo ($vehicle_type=='Cars')?'selected':'' ?>>Cars </option>
+                        <option <?php echo ($vehicle_type=='Truck')?'selected':'' ?>>Truck</option>
+                        <option <?php echo ($vehicle_type=='Others')?'selected':'' ?>>Others</option>
+
+                    </select>
+                    </div>
+
+
+                    <div class="col-lg-4 col-xs-6" class="form-group">
+                    <label>Duration </label> <span style="color:red; font-size:8px; "><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+                                      <input type="text" value="<?php echo $duration; ?>" name="duration" class="form-control" maxlength="20" placeholder="Eg:  4 Hrs">
+                        </div>
+
+                        <div class="col-lg-4 col-xs-6" class="form-group">
+                        <label><i class="fa fa-inr" aria-hidden="true"></i> Amount</label> <span style="color:red;font-size:8px;"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+                        <input type="number" name="amount" value="<?php echo $amount; ?>" class="form-control"  placeholder="00">
+                        </div>
+                    </div>
+
+                        <div class="row">
+                          <div class="col-lg-4 col-xs-6" class="form-group">
+
+                           <label>Remarks</label>
+                            <textarea class="form-control" name="remarks" <?php echo htmlspecialchars($remarks); ?> rows="3" placeholder="Enter ..."></textarea>
+                            </div>
+
+
+                         <div id="butn"  class="col-lg-3 col-xs-3">
+                         <button class="myButton" type="submit" name="submit"  value="Submit" class="btn btn-block btn-success btn-lg">SAVE</button>
+                         </div>
+
+                        </div>
+            </form> 
+			
+			
+			
+			
+			
+			
+			
+			<?php
+
+}
+
+
+
+
+
+
+
+// connect to the database
+
+include('connection.php');
+
+
+
+
+
+// check if the form has been submitted. If it has, process the form and save it to the database
+
+if (isset($_POST['submit']))
+
+{
+
+// confirm that the 'id' value is a valid integer before getting the form data
+
+if (is_numeric($_POST['id']))
+
+{
+
+// get form data, making sure it is valid
+
+$id = $_POST['id'];
+
+$vehicle_type = mysql_real_escape_string(htmlspecialchars($_POST['vehicle_type']));
+
+$duration = mysql_real_escape_string(htmlspecialchars($_POST['duration']));
+
+$amount = mysql_real_escape_string(htmlspecialchars($_POST['amount']));
+
+$remarks = mysql_real_escape_string(htmlspecialchars($_POST['remarks']));
+
+
+
+
+
+if ($vehicle_type=='' || $duration=='' || $amount=='' || $remarks=='')
+
+{
+
+// generate error message
+
+$error = 'ERROR: Please fill in all required fields!';
+
+
+
+//error, display form
+
+renderForm($id, $vehicle_type, $duration, $amount, $remarks, $error);
+
+}
+
+else
+
+{
+
+// save the data to the database
+
+mysql_query("UPDATE price_normal SET vehicle_type='$vehicle_type', duration='$duration', amount='$amount', remarks='$remarks', WHERE id='$id'")
+
+or die(mysql_error());
+
+
+
+// once saved, redirect back to the view page
+
+header("Location: pnormal.php");
+
+}
+
+}
+
+else
+
+{
+
+// if the 'id' isn't valid, display an error
+
+echo 'Error!';
+
+}
+
+}
+
+else
+
+
+{
+
+
+
+// get the 'id' value from the URL (if it exists), making sure that it is valid (checing that it is numeric/larger than 0)
+
+if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0)
+
+{
+
+// query db
+
+$id = $_GET['id'];
+
+$result = mysql_query("SELECT * FROM price_normal WHERE id=$id")
+
+or die(mysql_error());
+
+$row = mysql_fetch_array($result);
+
+
+
+// check that the 'id' matches up with a row in the databse
+
+if($row)
+
+{
+
+
+
+// get data from db
+
+$vehicle_type = $row['vehicle_type'];
+
+$duration = $row['duration'];
+
+$amount = $row['amount'];
+
+$remarks = $row['remarks'];
+
+
+
+
+
+// show form
+
+renderForm($id, $vehicle_type, $duration, $amount, $remarks,'');
+
+}
+
+else
+
+// if no match, display result
+
+{
+
+echo "No results!";
+
+}
+
+}
+
+else
+
+// if the 'id' in the URL isn't valid, or if there is no 'id' value, display an error
+
+{
+
+echo 'Error!';
+
+}
+
+}
+
+?>

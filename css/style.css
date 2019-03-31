@@ -1,0 +1,8 @@
+body{
+	margin: 0;
+	padding: 0;
+	background-image: url(picture/jane.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: arial black;
+}
